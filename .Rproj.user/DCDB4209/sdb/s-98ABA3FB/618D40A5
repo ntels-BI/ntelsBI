@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "#' Match string using Regex patterns\n#'\n#' Match string out directly\n#' @export\n#' @examples\n#' t <- c(\"Ab80\", \"bU09\", \"CC11\", \"D0A1\", \"EW19\", \"fp39\")\n#' regmatch(\"[A-Z]\", t)\n#' regmatch(\"[A-Z]\", t, global = T)\n\nregmatch <- function(pattern, text, global = F, ...){\n\n  ## content\n  if(global){\n    m <- gregexpr(pattern, text, ...)\n    res <- regmatches(text, m)\n  }\n\n  if(global == F){\n    m <- regexpr(pattern, text, ...)\n    res <- regmatches(text, m)\n  }\n\n  return(res)\n}\n",
+    "created" : 1502418490888.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2939170685",
+    "id" : "618D40A5",
+    "lastKnownWriteTime" : 1502418521,
+    "last_content_update" : 1502418521475,
+    "path" : "~/Googledrive_ntels/Ntels_BI/21_FrameWork/R/Package/ntelsBI/R/regmatch.R",
+    "project_path" : "R/regmatch.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
