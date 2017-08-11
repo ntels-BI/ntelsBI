@@ -3,7 +3,7 @@
 ### Install
 
 ```r
-ntels-BI/ntelsBI
+devtools::install_github("ntels-BI/ntelsBI")
 ```
 
 ### License
