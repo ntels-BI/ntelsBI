@@ -2,8 +2,7 @@
 % Please edit documentation in R/spCoordinateTrans.R
 \name{spCoordinateTrans}
 \alias{spCoordinateTrans}
-\title{Coordinates Transformation about sp object function
-좌표계를 변환하는 함수로써, 디폴트로는 UTM-K(GRS-80) 좌표계를 WGS84 좌표계로 변환함}
+\title{Coordinates Transformation about sp object function}
 \usage{
 spCoordinateTrans(long, lat,
   from.crs = "+proj=tmerc +lat_0=38 +lon_0=127.5 +k=0.9996 +x_0=1000000 +y_0=2000000 +ellps=GRS80 +units=m +no_defs",
@@ -15,6 +14,5 @@ spCoordinateTrans(long, lat,
 \item{lat}{input latitude vector}
 }
 \description{
-Coordinates Transformation about sp object function
 좌표계를 변환하는 함수로써, 디폴트로는 UTM-K(GRS-80) 좌표계를 WGS84 좌표계로 변환함
 }

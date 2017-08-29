@@ -1,5 +1,5 @@
 #' Coordinates Transformation about sp object function
-#' 좌표계를 변환하는 함수로써, 디폴트로는 UTM-K(GRS-80) 좌표계를 WGS84 좌표계로 변환함
+#' @description 좌표계를 변환하는 함수로써, 디폴트로는 UTM-K(GRS-80) 좌표계를 WGS84 좌표계로 변환함
 #' @param long input longitude vector
 #' @param lat input latitude vector
 #' @example

@@ -1,6 +1,5 @@
 #' Range scaling 0 to 1
-#'
-#' Range scaling 0 to 1
+#' @description Range scaling 0 to 1
 #' @param x numeric vector
 #' @export
 #' @examples

@@ -1,6 +1,5 @@
 #' Match string using Regex patterns
-#'
-#' Match string out directly
+#' @description Match string out directly
 #' @export
 #' @examples
 #' t <- c("Ab80", "bU09", "CC11", "D0A1", "EW19", "fp39")
