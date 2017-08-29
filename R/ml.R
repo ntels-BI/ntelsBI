@@ -47,7 +47,7 @@ ml <- function(data, class,
 #' @example
 #' ml(iris, "Species") %>% fitSummary
 
-fitSummary <- function(fitObject, testset = NULL, class = fitObject$class, type = c("cla", "reg"), positive = "1", ...){
+fitSummary <- function(fitObject, testset = NULL, class = fitObject$class, type = c("cla", "reg"), ...){
 
   ## Pre
   stopifnot(require(tidyverse)); stopifnot(require(caret));

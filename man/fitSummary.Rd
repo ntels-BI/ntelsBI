@@ -5,7 +5,7 @@
 \title{Fitting summary}
 \usage{
 fitSummary(fitObject, testset = NULL, class = fitObject$class,
-  type = c("cla", "reg"), positive = "1", ...)
+  type = c("cla", "reg"), ...)
 }
 \arguments{
 \item{fitObject}{a "ml" class object}

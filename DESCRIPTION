@@ -1,7 +1,7 @@
 Package: ntelsBI
 Type: Package
 Title: Analysis R package for ntels Business Intelligence Team
-Version: 0.1.1
+Version: 0.1.2
 Author: ntels Business Intelligence Team
 Maintainer: HyoJin Song <hjsong@ntels.com> a.k.a lovetoken <lt.lovetoken@gmail.com>
 Description: -
