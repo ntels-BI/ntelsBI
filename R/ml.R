@@ -1,5 +1,5 @@
 #' Machine learning framework using caret package
-#' @description Machine learning framework using caret package. 만약 이분류 클래스의 Imbalanced class problem 으로 인한 훈련데이터셋의 resampling 이 필요할 경우 \code{resampling = T}
+#' @description Machine learning framework using caret package.
 #' @param data a data.frame.
 #' @param class a character. Input the class Y variable names
 #' @param method choice machine learning algorithm method
@@ -8,22 +8,18 @@
 #' ml(iris, "Species")
 
 ml <- function(data, class,
-               method = "rpart", partitionRate = .7, resampling = F, fitImage = NULL, ...){
+               method = "rpart", partitionRate = .7, fitImage = NULL, ...){
 
   ## Pre
   stopifnot(require(tidyverse)); stopifnot(require(caret)); stopifnot(require(ROSE));
   class <- as.character(class)
-  fm <- as.formula(paste(class, "~ ."))
+  fmChar <- paste(class, "~ .")
+  fm <- formula(fmChar)
 
   ## Create training set, test set
   indexTrain <- createDataPartition(pull(data, class), p = partitionRate, list = F)
   testing  <- data[-indexTrain, ] %>% distinct
-
-  if(resampling){
-    training <- ovun.sample(fm, data[ indexTrain, ], method = "both", p = .4)$data %>% tbl_df
-  } else {
-    training <- data[ indexTrain, ]
-  }
+  training <- data[ indexTrain, ]
 
   ## Learning rule setting
   fitControl <- trainControl(method = "repeatedcv", ...)

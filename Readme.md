@@ -20,8 +20,6 @@ ml(iris, "Species", method = "rpart") %>% fitSummary(type = "cla")
 ```
 
 ```
-##    user  system elapsed 
-##   0.893   0.019   0.917 
 ## CART 
 ## 
 ## 105 samples
@@ -29,24 +27,19 @@ ml(iris, "Species", method = "rpart") %>% fitSummary(type = "cla")
 ##   3 classes: 'setosa', 'versicolor', 'virginica' 
 ## 
 ## No pre-processing
-## Resampling: Cross-Validated (2 fold, repeated 2 times) 
-## Summary of sample sizes: 52, 53, 52, 53 
+## Resampling: Cross-Validated (10 fold, repeated 1 times) 
+## Summary of sample sizes: 95, 94, 95, 94, 93, 96, ... 
 ## Resampling results across tuning parameters:
 ## 
-##   cp          Accuracy   Kappa    
-##   0.00000000  0.9428520  0.9142468
-##   0.05555556  0.9428520  0.9142468
-##   0.11111111  0.9428520  0.9142468
-##   0.16666667  0.9428520  0.9142468
-##   0.22222222  0.9428520  0.9142468
-##   0.27777778  0.9428520  0.9142468
-##   0.33333333  0.9428520  0.9142468
-##   0.38888889  0.9428520  0.9142468
-##   0.44444444  0.9428520  0.9142468
-##   0.50000000  0.3238389  0.0000000
+##   cp     Accuracy   Kappa     
+##   0.000  0.9427273  0.91352160
+##   0.125  0.9427273  0.91352160
+##   0.250  0.9427273  0.91352160
+##   0.375  0.9427273  0.91352160
+##   0.500  0.3557576  0.08571429
 ## 
 ## Accuracy was used to select the optimal model using  the largest value.
-## The final value used for the model was cp = 0.4444444.
+## The final value used for the model was cp = 0.375.
 ```
 
 ```
@@ -55,30 +48,30 @@ ml(iris, "Species", method = "rpart") %>% fitSummary(type = "cla")
 ##             Reference
 ## Prediction   setosa versicolor virginica
 ##   setosa         15          0         0
-##   versicolor      0         15        15
-##   virginica       0          0         0
+##   versicolor      0         12         1
+##   virginica       0          3        14
 ## 
 ## Overall Statistics
-##                                        
-##                Accuracy : 0.6667       
-##                  95% CI : (0.5105, 0.8)
-##     No Information Rate : 0.3333       
-##     P-Value [Acc > NIR] : 0.000005001  
-##                                        
-##                   Kappa : 0.5          
-##  Mcnemar's Test P-Value : NA           
+##                                           
+##                Accuracy : 0.9111          
+##                  95% CI : (0.7878, 0.9752)
+##     No Information Rate : 0.3333          
+##     P-Value [Acc > NIR] : 8.467e-16       
+##                                           
+##                   Kappa : 0.8667          
+##  Mcnemar's Test P-Value : NA              
 ## 
 ## Statistics by Class:
 ## 
 ##                      Class: setosa Class: versicolor Class: virginica
-## Sensitivity                 1.0000            1.0000           0.0000
-## Specificity                 1.0000            0.5000           1.0000
-## Pos Pred Value              1.0000            0.5000              NaN
-## Neg Pred Value              1.0000            1.0000           0.6667
+## Sensitivity                 1.0000            0.8000           0.9333
+## Specificity                 1.0000            0.9667           0.9000
+## Pos Pred Value              1.0000            0.9231           0.8235
+## Neg Pred Value              1.0000            0.9062           0.9643
 ## Prevalence                  0.3333            0.3333           0.3333
-## Detection Rate              0.3333            0.3333           0.0000
-## Detection Prevalence        0.3333            0.6667           0.0000
-## Balanced Accuracy           1.0000            0.7500           0.5000
+## Detection Rate              0.3333            0.2667           0.3111
+## Detection Prevalence        0.3333            0.2889           0.3778
+## Balanced Accuracy           1.0000            0.8833           0.9167
 ```
 
 * Random forest 를 통한 `mtcars` mpg 예측
@@ -89,37 +82,29 @@ ml(mtcars, "mpg", method = "rf") %>% fitSummary(type = "reg")
 ```
 
 ```
-## note: only 9 unique complexity parameters in default grid. Truncating the grid to 9 .
-## 
-##    user  system elapsed 
-##   1.649   0.018   1.676 
 ## Random Forest 
 ## 
 ## 24 samples
 ## 10 predictors
 ## 
 ## No pre-processing
-## Resampling: Cross-Validated (2 fold, repeated 2 times) 
-## Summary of sample sizes: 12, 12, 12, 12 
+## Resampling: Cross-Validated (10 fold, repeated 1 times) 
+## Summary of sample sizes: 22, 21, 22, 21, 22, 22, ... 
 ## Resampling results across tuning parameters:
 ## 
 ##   mtry  RMSE      Rsquared 
-##    2    2.927345  0.8321871
-##    3    2.881485  0.8354123
-##    4    2.748164  0.8567847
-##    5    2.788333  0.8451637
-##    6    2.768051  0.8508925
-##    7    2.744741  0.8470597
-##    8    2.766874  0.8486798
-##    9    2.833137  0.8418135
-##   10    2.765961  0.8431693
+##    2    2.598047  0.8859682
+##    4    2.422261  0.8895090
+##    6    2.479915  0.8920671
+##    8    2.495053  0.8924231
+##   10    2.587784  0.8940325
 ## 
 ## RMSE was used to select the optimal model using  the smallest value.
-## The final value used for the model was mtry = 7.
+## The final value used for the model was mtry = 4.
 ```
 
 ```
-## [1] 6.146755
+## [1] 5.511206
 ```
 
 <br>

@@ -33,6 +33,12 @@ opts_chunk$set(fig.path = "output/figure/", fig.align = "center", out.width = "8
 ml(iris, "Species", method = "rpart") %>% fitSummary(type = "cla")
 ```
 
+* GLM 을 통한 `mtcars` 의 `am` 리샘플링 이후의 분류
+
+```{r}
+ml(mtcars, "am", resampling = T, method = "glm") %>% fitSummary(type = "cla")
+```
+
 * Random forest 를 통한 `mtcars` mpg 예측
 
 ```{r}
