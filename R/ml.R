@@ -1,5 +1,5 @@
 #' Machine learning framework using caret package
-#' @description Machine learning framework using caret package
+#' @description Machine learning framework using caret package. 만약 이분류 클래스의 Imbalanced class problem 으로 인한 훈련데이터셋의 resampling 이 필요할 경우 \code{resampling = T}
 #' @param data a data.frame.
 #' @param class a character. Input the class Y variable names
 #' @param method choice machine learning algorithm method
@@ -8,28 +8,32 @@
 #' ml(iris, "Species")
 
 ml <- function(data, class,
-               method = "rpart", cvK = 2, cvRepeat = 2, partitionRate = .7, fitImage = NULL, ...){
+               method = "rpart", partitionRate = .7, resampling = F, fitImage = NULL, ...){
 
   ## Pre
-  stopifnot(require(tidyverse)); stopifnot(require(caret));
-  classname <- as.character(class)
+  stopifnot(require(tidyverse)); stopifnot(require(caret)); stopifnot(require(ROSE));
+  class <- as.character(class)
+  fm <- as.formula(paste(class, "~ ."))
 
   ## Create training set, test set
-  indexTrain <- createDataPartition(pull(data, classname), p = partitionRate, list = F)
-  training <- data[ indexTrain, ]
+  indexTrain <- createDataPartition(pull(data, class), p = partitionRate, list = F)
   testing  <- data[-indexTrain, ] %>% distinct
 
+  if(resampling){
+    training <- ovun.sample(fm, data[ indexTrain, ], method = "both", p = .4)$data %>% tbl_df
+  } else {
+    training <- data[ indexTrain, ]
+  }
+
   ## Learning rule setting
-  fitControl <- trainControl(method = "repeatedcv", number = cvK, repeats = cvRepeat, ...)
+  fitControl <- trainControl(method = "repeatedcv", ...)
 
   ## Create fit object
   procTime <- system.time({
-    fm <- paste0(classname, " ~ .") %>% as.formula
-    fit <- train(fm, data = training, method = method, trControl = fitControl, tuneLength = 10)
+    fit <- train(fm, data = training, method = method, trControl = fitControl, tuneLength = 5)
   })
 
   ## Output
-  print(procTime)
   res <- list(training = training, testing = testing, class = class, fit = fit, procTime = procTime)
   class(res) <- "ml"
   if(!is.null(fitImage)) save(res, file = paste0("./output/", fitImage, ".rda"))
@@ -38,20 +42,21 @@ ml <- function(data, class,
 }
 
 #' Fitting summary
-#' @description Fitting assess summary, Classification 일 경우 혼돈메트릭스, Regression 일 경우 MSE 가 반환되며 조건은 \code{type} 인자를 이용합니다.
+#' @description Fitting assess summary, Classification 일 경우 혼돈메트릭스, Regression 일 경우 MSE 가 반환되며 \code{type} 인자를 통해 Classification 인지 Regression 인지 선택합니다.
 #' @param fitObject a "ml" class object
 #' @param testset if new testset
 #' @param method choice machine learning algorithm method
 #' @param fitImage a character. Input filename for chaching fit Object
 #' @return \code{type} if "cla", confusion matrix. else "reg" numeric of MSE
 #' @example
-#' ml(iris, "Species") %>% fitSummary
+#' ml(iris, "Species") %>% fitSummary(type = "cla")
 
 fitSummary <- function(fitObject, testset = NULL, class = fitObject$class, type = c("cla", "reg"), ...){
 
   ## Pre
+  stopifnot(class(fitObject) == "ml")
   stopifnot(require(tidyverse)); stopifnot(require(caret));
-  classname <- as.character(class)
+  class <- as.character(class)
 
   ## Content
   fitRes <- fitObject$fit
@@ -60,18 +65,18 @@ fitSummary <- function(fitObject, testset = NULL, class = fitObject$class, type 
 
     if(is.null(testset)){
       res <- confusionMatrix(predict(fitRes, newdata = fitObject$testing),
-                             fitObject$testing %>% pull(classname), ...)
+                             fitObject$testing %>% pull(class), ...)
     } else {
       res <- confusionMatrix(predict(fitRes, newdata = testset),
-                             testset %>% pull(classname), ...)
+                             testset %>% pull(class), ...)
     }
 
   } else if(type == "reg"){
 
     if(is.null(testset)){
-      res <- mean((predict(fitRes, newdata = fitObject$testing) - pull(fitObject$testing, classname))^2)
+      res <- mean((predict(fitRes, newdata = fitObject$testing) - pull(fitObject$testing, class))^2)
     } else {
-      res <- mean((predict(fitRes, newdata = fitObject$testing) - pull(testset, classname))^2)
+      res <- mean((predict(fitRes, newdata = fitObject$testing) - pull(testset, class))^2)
     }
 
   }
