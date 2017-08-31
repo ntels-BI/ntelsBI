@@ -11,7 +11,7 @@ ml <- function(data, class,
                method = "rpart", partitionRate = .7, fitImage = NULL, ...){
 
   ## Pre
-  stopifnot(require(tidyverse)); stopifnot(require(caret)); stopifnot(require(ROSE));
+  stopifnot(require(tidyverse)); stopifnot(require(caret));
   class <- as.character(class)
   fmChar <- paste(class, "~ .")
   fm <- formula(fmChar)
@@ -79,7 +79,6 @@ fitSummary <- function(fitObject, testset = NULL, class = fitObject$class, type 
 
   ## Output
   paste0("Traning set N row : ", nrow(fitObject$training), " / ", "Test set N row : ", nrow(fitObject$testing)) %>% message
-  print(fitRes)
   return(res)
 
 }

@@ -20,5 +20,5 @@ fitSummary(fitObject, testset = NULL, class = fitObject$class,
 \code{type} if "cla", confusion matrix. else "reg" numeric of MSE
 }
 \description{
-Fitting assess summary, Classification 일 경우 혼돈메트릭스, Regression 일 경우 MSE 가 반환되며 조건은 \code{type} 인자를 이용합니다.
+Fitting assess summary, Classification 일 경우 혼돈메트릭스, Regression 일 경우 MSE 가 반환되며 \code{type} 인자를 통해 Classification 인지 Regression 인지 선택합니다.
 }

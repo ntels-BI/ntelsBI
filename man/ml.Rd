@@ -4,8 +4,8 @@
 \alias{ml}
 \title{Machine learning framework using caret package}
 \usage{
-ml(data, class, method = "rpart", cvK = 2, cvRepeat = 2,
-  partitionRate = 0.7, fitImage = NULL, ...)
+ml(data, class, method = "rpart", partitionRate = 0.7, fitImage = NULL,
+  ...)
 }
 \arguments{
 \item{data}{a data.frame.}
@@ -17,5 +17,5 @@ ml(data, class, method = "rpart", cvK = 2, cvRepeat = 2,
 \item{fitImage}{a character. Input filename for chaching fit Object}
 }
 \description{
-Machine learning framework using caret package
+Machine learning framework using caret package.
 }
