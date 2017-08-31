@@ -4,6 +4,7 @@
 #' @param class a character. Input the class Y variable names
 #' @param method choice machine learning algorithm method
 #' @param fitImage a character. Input filename for chaching fit Object
+#' @export
 #' @example
 #' ml(iris, "Species")
 
@@ -44,6 +45,7 @@ ml <- function(data, class,
 #' @param method choice machine learning algorithm method
 #' @param fitImage a character. Input filename for chaching fit Object
 #' @return \code{type} if "cla", confusion matrix. else "reg" numeric of MSE
+#' @export
 #' @example
 #' ml(iris, "Species") %>% fitSummary(type = "cla")
 

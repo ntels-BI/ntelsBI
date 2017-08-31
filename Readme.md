@@ -1,10 +1,4 @@
 # Analysis R package for ntels Business Intelligence Team
-<a href = "https://lovetoken.github.io">lovetoken</a>  
-`r Sys.Date()`  
-
-
-
-<br><br>
 
 ## Tutorial
 
@@ -20,58 +14,72 @@ ml(iris, "Species", method = "rpart") %>% fitSummary(type = "cla")
 ```
 
 ```
-## CART 
-## 
-## 105 samples
-##   4 predictor
-##   3 classes: 'setosa', 'versicolor', 'virginica' 
-## 
-## No pre-processing
-## Resampling: Cross-Validated (10 fold, repeated 1 times) 
-## Summary of sample sizes: 95, 94, 95, 94, 93, 96, ... 
-## Resampling results across tuning parameters:
-## 
-##   cp     Accuracy   Kappa     
-##   0.000  0.9427273  0.91352160
-##   0.125  0.9427273  0.91352160
-##   0.250  0.9427273  0.91352160
-##   0.375  0.9427273  0.91352160
-##   0.500  0.3557576  0.08571429
-## 
-## Accuracy was used to select the optimal model using  the largest value.
-## The final value used for the model was cp = 0.375.
-```
-
-```
 ## Confusion Matrix and Statistics
 ## 
 ##             Reference
 ## Prediction   setosa versicolor virginica
 ##   setosa         15          0         0
-##   versicolor      0         12         1
-##   virginica       0          3        14
+##   versicolor      0         14         5
+##   virginica       0          1        10
 ## 
 ## Overall Statistics
-##                                           
-##                Accuracy : 0.9111          
-##                  95% CI : (0.7878, 0.9752)
-##     No Information Rate : 0.3333          
-##     P-Value [Acc > NIR] : 8.467e-16       
-##                                           
-##                   Kappa : 0.8667          
-##  Mcnemar's Test P-Value : NA              
+##                                             
+##                Accuracy : 0.8667            
+##                  95% CI : (0.7321, 0.9495)  
+##     No Information Rate : 0.3333            
+##     P-Value [Acc > NIR] : 0.0000000000001905
+##                                             
+##                   Kappa : 0.8               
+##  Mcnemar's Test P-Value : NA                
 ## 
 ## Statistics by Class:
 ## 
 ##                      Class: setosa Class: versicolor Class: virginica
-## Sensitivity                 1.0000            0.8000           0.9333
-## Specificity                 1.0000            0.9667           0.9000
-## Pos Pred Value              1.0000            0.9231           0.8235
-## Neg Pred Value              1.0000            0.9062           0.9643
+## Sensitivity                 1.0000            0.9333           0.6667
+## Specificity                 1.0000            0.8333           0.9667
+## Pos Pred Value              1.0000            0.7368           0.9091
+## Neg Pred Value              1.0000            0.9615           0.8529
 ## Prevalence                  0.3333            0.3333           0.3333
-## Detection Rate              0.3333            0.2667           0.3111
-## Detection Prevalence        0.3333            0.2889           0.3778
-## Balanced Accuracy           1.0000            0.8833           0.9167
+## Detection Rate              0.3333            0.3111           0.2222
+## Detection Prevalence        0.3333            0.4222           0.2444
+## Balanced Accuracy           1.0000            0.8833           0.8167
+```
+
+* GLM 을 통한 `Sonar` 의 `Class` 분류 (Class = "R" 이 주관심사일 경우)
+
+
+```r
+data(Sonar, package = "mlbench")
+ml(Sonar, "Class", method = "glm") %>% fitSummary(type = "cla", positive = "R")
+```
+
+```
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction  M  R
+##          M 26 12
+##          R  7 17
+##                                           
+##                Accuracy : 0.6935          
+##                  95% CI : (0.5635, 0.8044)
+##     No Information Rate : 0.5323          
+##     P-Value [Acc > NIR] : 0.007171        
+##                                           
+##                   Kappa : 0.378           
+##  Mcnemar's Test P-Value : 0.358795        
+##                                           
+##             Sensitivity : 0.5862          
+##             Specificity : 0.7879          
+##          Pos Pred Value : 0.7083          
+##          Neg Pred Value : 0.6842          
+##              Prevalence : 0.4677          
+##          Detection Rate : 0.2742          
+##    Detection Prevalence : 0.3871          
+##       Balanced Accuracy : 0.6870          
+##                                           
+##        'Positive' Class : R               
+## 
 ```
 
 * Random forest 를 통한 `mtcars` mpg 예측
@@ -82,29 +90,7 @@ ml(mtcars, "mpg", method = "rf") %>% fitSummary(type = "reg")
 ```
 
 ```
-## Random Forest 
-## 
-## 24 samples
-## 10 predictors
-## 
-## No pre-processing
-## Resampling: Cross-Validated (10 fold, repeated 1 times) 
-## Summary of sample sizes: 22, 21, 22, 21, 22, 22, ... 
-## Resampling results across tuning parameters:
-## 
-##   mtry  RMSE      Rsquared 
-##    2    2.598047  0.8859682
-##    4    2.422261  0.8895090
-##    6    2.479915  0.8920671
-##    8    2.495053  0.8924231
-##   10    2.587784  0.8940325
-## 
-## RMSE was used to select the optimal model using  the smallest value.
-## The final value used for the model was mtry = 4.
-```
-
-```
-## [1] 5.511206
+## [1] 5.675074
 ```
 
 <br>

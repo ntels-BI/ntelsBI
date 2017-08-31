@@ -2,6 +2,7 @@
 #' @description 좌표계를 변환하는 함수로써, 디폴트로는 UTM-K(GRS-80) 좌표계를 WGS84 좌표계로 변환함
 #' @param long input longitude vector
 #' @param lat input latitude vector
+#' @export
 #' @example
 #' exdata <- data.frame(long = c(1039197, 1041137, 1039216, 1037176), lat = c(1926417, 1927056, 1927526, 1924963))
 #' utm2wgs(exdata$long, exdata$lat)
