@@ -48,14 +48,23 @@ ml(mtcars, "mpg", method = "rf") %>% fitSummary(type = "reg")
 
 <br>
 
-### Useful preprocessing
+### Useful Preprocessing
 
 * `range01()` function : Standardization 0 to 100
 
 ```{r}
-x <- c(0, 4, 7, 9, 10)
+x <- c(0, 2.59, 4.588, 5.0904, 11.11121)
 range01(x) * 100 
 ```
+
+* `csv2rda()` function : 워킹디렉토리의 table 형 파일들을 rda 포맷으로 변환시킵니다. 예를들면 csv 파일을 읽어들인 후 rda 포맷으로 변환시킵니다.
+
+```{r eval = F}
+csv2rda()
+csv2rda(delete = T) # 변환 후 table 형의 원본파일들이 지워집니다.
+```
+
+<br><br>
 
 ## Install
 
@@ -63,7 +72,7 @@ range01(x) * 100
 devtools::install_github("ntels-BI/ntelsBI")
 ```
 
-<br>
+<br><br>
 
 ## License
 
