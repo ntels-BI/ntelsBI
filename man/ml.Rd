@@ -4,8 +4,8 @@
 \alias{ml}
 \title{Machine learning framework using caret package}
 \usage{
-ml(data, class, method = "rpart", partitionRate = 0.7, fitImage = NULL,
-  ...)
+ml(data, class, method = "rpart", partitionRate = 0.7, tuneLength = 5,
+  fitImage = NULL, ...)
 }
 \arguments{
 \item{data}{a data.frame.}
@@ -16,6 +16,9 @@ ml(data, class, method = "rpart", partitionRate = 0.7, fitImage = NULL,
 
 \item{fitImage}{a character. Input filename for chaching fit Object}
 }
+\value{
+list type 이 반환되나 \code{ml} 클래스 입니다.
+}
 \description{
-Machine learning framework using caret package.
+예측의 대상이되는 주관심변수를 기준으로 동등비율이 되게 Training set 과 Test set 을 분리시킨 후 Training set 에 대해서만 학습시킨 결과를 list 형으로 반환합니다. 단 Test set 은 반환되는 리스트의 속성값으로 저장됩니다.
 }
