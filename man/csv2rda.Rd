@@ -4,9 +4,11 @@
 \alias{csv2rda}
 \title{Write rda about imported tables}
 \usage{
-csv2rda(path = ".", delete = F, format = c("csv", "txt"), ...)
+csv2rda(pattern = NULL, delete = F, format = c("csv", "txt"), ...)
 }
 \arguments{
+\item{path}{a character}
+
 \item{method}{choice machine learning algorithm method}
 
 \item{fitImage}{a character. Input filename for chaching fit Object}
