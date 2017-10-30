@@ -4,17 +4,17 @@
 #' @param lat input latitude vector
 #' @export
 #' @example
-#' exdata <- data.frame(long = c(1039197, 1041137, 1039216, 1037176), lat = c(1926417, 1927056, 1927526, 1924963))
-#' utm2wgs(exdata$long, exdata$lat)
+#' exdata <- data.frame(long = c(1039197, 1041137, 1039216, 1037176), lat = c(1926417, 1927056, 1927526, 1924963)) # UTM-K(GRS-80)
+#' spCoordinateTrans(exdata$long, exdata$lat) # WGS84
 
 spCoordinateTrans <- function(long, lat,
                               from.crs = "+proj=tmerc +lat_0=38 +lon_0=127.5 +k=0.9996 +x_0=1000000 +y_0=2000000 +ellps=GRS80 +units=m +no_defs",
                               to.crs = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"){
 
-  ## pre
-  stopifnot(require(sp))
+  ## Pre
+  stopifnot(require(sp)); stopifnot(require(tidyverse))
 
-  ## content
+  ## Content
   xy <- data.frame(long = long, lat = lat)
   coordinates(xy) <- ~ long + lat
 
@@ -22,9 +22,11 @@ spCoordinateTrans <- function(long, lat,
   from.coordinates <- SpatialPoints(xy, proj4string = from.crs)
 
   to.crs <- CRS(to.crs)
-  changed <- as.data.frame(SpatialPoints(spTransform(from.coordinates, to.crs)))
-  names(changed) <- c("long", "lat")
+  changed <- from.coordinates %>%
+    spTransform(to.crs) %>%
+    SpatialPoints %>%
+    tbl_df
 
+  ## Output
   return(changed)
-
 }

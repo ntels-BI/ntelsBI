@@ -13,8 +13,7 @@ output:
 ---
 
 ```{r env, echo = F, warning = F, message = F}
-pacman::p_load("knitr", "tidyverse", "ggplot2", "data.table", "mlbench")
-library(ntelsBI)
+pacman::p_load("knitr", "tidyverse", "ggplot2", "data.table", "mlbench"); library(ntelsBI)
 opts_chunk$set(fig.path = "output/figure/", fig.align = "center", out.width = "80%", 
                warning = F, message = F)
 ```
@@ -25,7 +24,7 @@ opts_chunk$set(fig.path = "output/figure/", fig.align = "center", out.width = "8
 
 ### Machine learning
 
-`ml()` 함수를 이용하여 기계학습 훈련 및 평가를 수행할 수 있습니다.  
+`ml()` 함수를 이용하여 기계학습 훈련 및 평가를 수행
 
 * CART 를 통한 `iris` 꽃잎분류
 
@@ -50,18 +49,15 @@ ml(mtcars, "mpg", method = "rf") %>% fitSummary(type = "reg")
 
 ### Useful Preprocessing
 
-* `range01()` function : Standardization 0 to 100
+* `spCoordinateTrans()` function : 위경도 좌표변환
 
 ```{r}
-x <- c(0, 2.59, 4.588, 5.0904, 11.11121)
-range01(x) * 100 
-```
+exdata <- data.frame(long = c(1039197, 1041137, 1039216, 1037176), 
+                     lat = c(1926417, 1927056, 1927526, 1924963))
 
-* `csv2rda()` function : 워킹디렉토리의 table 형 파일들을 rda 포맷으로 변환시킵니다. 예를들면 csv 파일을 읽어들인 후 rda 포맷으로 변환시킵니다.
+exdata # UTM-K(GRS-80)
 
-```{r eval = F}
-csv2rda()
-csv2rda(delete = T) # 변환 후 table 형의 원본파일들이 지워집니다.
+spCoordinateTrans(exdata$long, exdata$lat) # To WGS84
 ```
 
 <br><br>
