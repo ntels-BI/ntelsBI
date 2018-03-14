@@ -13,21 +13,21 @@ ml <- function(data, class,
                method = "rpart", partitionRate = .7, tuneLength = 5, fitImage = NULL, ...){
 
   ## Pre
-  stopifnot(require(tidyverse)); stopifnot(require(caret));
+  stopifnot(require(tidyverse), require(caret))
   class <- as.character(class)
   fmChar <- paste(class, "~ .")
   fm <- formula(fmChar)
 
   ## Create training set, test set
-  indexTrain <- createDataPartition(pull(data, class), p = partitionRate, list = F)
-  testing  <- data[-indexTrain, ] %>% distinct
-  training <- data[ indexTrain, ]
+  indexTrain <- caret::createDataPartition(dplyr::pull(data, class), p = partitionRate, list = F)
+  testing <- dplyr::distinct(data[-indexTrain, ])
+  training <- data[indexTrain, ]
 
   ## Learning rule setting
-  fitControl <- trainControl(method = "repeatedcv", ...)
+  fitControl <- caret::trainControl(method = "repeatedcv", ...)
 
   ## Create fit object
-  procTime <- system.time(fit <- train(fm, data = training, method = method, trControl = fitControl, tuneLength = tuneLength))
+  procTime <- system.time(fit <- caret::train(fm, data = training, method = method, trControl = fitControl, tuneLength = tuneLength))
 
   ## Output
   res <- list(class = class, fit = fit, testing = testing, procTime = procTime)
@@ -46,7 +46,8 @@ ml <- function(data, class,
 #' @return \code{type} if "cla", confusion matrix. else "reg" numeric of MSE
 #' @export
 #' @example
-#' ml(iris, "Species") %>% fitSummary(type = "cla")
+#' fit <- ml(iris, "Species")
+#' fitSummary(fit, type = "cla")
 
 fitSummary <- function(fitObject, testset = NULL, class = fitObject$class, type = c("cla", "reg"), ...){
 
