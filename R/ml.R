@@ -12,26 +12,19 @@
 ml <- function(data, class,
                method = "rpart", partitionRate = .7, tuneLength = 5, fitImage = NULL, ...){
 
-  ## Pre
-  stopifnot(require(tidyverse), require(caret))
   class <- as.character(class)
   fmChar <- paste(class, "~ .")
   fm <- formula(fmChar)
 
-  ## Create training set, test set
   indexTrain <- caret::createDataPartition(dplyr::pull(data, class), p = partitionRate, list = F)
   testing <- dplyr::distinct(data[-indexTrain, ])
   training <- data[indexTrain, ]
 
-  ## Learning rule setting
   fitControl <- caret::trainControl(method = "repeatedcv", ...)
-
-  ## Create fit object
   procTime <- system.time(fit <- caret::train(fm, data = training, method = method, trControl = fitControl, tuneLength = tuneLength))
-
-  ## Output
   res <- list(class = class, fit = fit, testing = testing, procTime = procTime)
   class(res) <- "ml"
+
   if(!is.null(fitImage)) save(res, file = paste0("./output/", fitImage, ".rda"))
   return(res)
 
@@ -51,39 +44,32 @@ ml <- function(data, class,
 
 fitSummary <- function(fitObject, testset = NULL, class = fitObject$class, type = c("cla", "reg"), ...){
 
-  ## Pre
   stopifnot(class(fitObject) == "ml")
-  stopifnot(require(tidyverse)); stopifnot(require(caret));
   class <- as.character(class)
 
-  ## Content
   fit <- fitObject$fit
-
   if(type == "cla"){ # output confusion matrix
 
     if(is.null(testset)){
-      res <- confusionMatrix(predict(fit, newdata = fitObject$testing),
-                             fitObject$testing %>% pull(class), ...)
+      res <- caret::confusionMatrix(predict(fit, newdata = fitObject$testing), dplyr::pull(fitObject$testing, class), ...)
     } else {
-      res <- confusionMatrix(predict(fit, newdata = testset),
-                             testset %>% pull(class), ...)
+      res <- caret::confusionMatrix(predict(fit, newdata = testset), dplyr::pull(testset, class), ...)
     }
 
   } else if(type == "reg"){ # output MSE
 
     if(is.null(testset)){
-      res <- mean((predict(fit, newdata = fitObject$testing) - pull(fitObject$testing, class))^2)
+      res <- mean((predict(fit, newdata = fitObject$testing) - dplyr::pull(fitObject$testing, class))^2)
     } else {
-      res <- mean((predict(fit, newdata = fitObject$testing) - pull(testset, class))^2)
+      res <- mean((predict(fit, newdata = testset) - dplyr::pull(testset, class))^2)
     }
 
   }
 
-  ## Output
   return(res)
 
 }
 
 #' @export
 
-print.ml <- function(x) print(x[c("fit", "class", "procTime")])
+print.ml <- function(x, ...) print(x[c("fit", "class", "procTime")])
