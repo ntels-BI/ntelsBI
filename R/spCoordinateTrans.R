@@ -5,7 +5,7 @@
 #' @from.crs from crs formula input
 #' @to.crs to crs formula input
 #' @export
-#' @example
+#' @examples
 #' exdata <- data.frame(long = c(1039197, 1041137, 1039216, 1037176), lat = c(1926417, 1927056, 1927526, 1924963)) # UTM-K(GRS-80)
 #' spCoordinateTrans(exdata$long, exdata$lat) # WGS84
 

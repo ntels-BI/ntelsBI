@@ -6,7 +6,7 @@
 #' @param fitImage a character. Input filename for chaching fit Object
 #' @return list type 이 반환되나 \code{ml} 클래스 입니다.
 #' @export
-#' @example
+#' @examples
 #' ml(iris, "Species")
 
 ml <- function(data, class,
@@ -38,7 +38,7 @@ ml <- function(data, class,
 #' @param fitImage a character. Input filename for chaching fit Object
 #' @return \code{type} if "cla", confusion matrix. else "reg" numeric of MSE
 #' @export
-#' @example
+#' @examples
 #' fit <- ml(iris, "Species")
 #' fitSummary(fit, type = "cla")
 
