@@ -22,3 +22,7 @@ fitSummary(fitObject, testset = NULL, class = fitObject$class,
 \description{
 \code{ml} class 인 학습결과 및 테스트셋을 이용하여 Classification 일 경우 혼돈메트릭스, Regression 일 경우 MSE 가 반환되며 \code{type} 인자를 통해 Classification 인지 Regression 인지 선택합니다.
 }
+\examples{
+fit <- ml(iris, "Species")
+fitSummary(fit, type = "cla")
+}
