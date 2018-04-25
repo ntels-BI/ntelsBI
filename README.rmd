@@ -13,6 +13,14 @@ opts_chunk$set(fig.path = "output/figure/", fig.align = "center", out.width = "8
 
 <br><br>
 
+## Install
+
+```{r eval = F}
+devtools::install_github("ntels-BI/ntelsBI")
+```
+
+<br><br>
+
 ## Tutorial
 
 ### Machine learning
@@ -53,12 +61,22 @@ exdata # UTM-K(GRS-80)
 spCoordinateTrans(exdata$long, exdata$lat) # To WGS84
 ```
 
-<br><br>
+* `addressToCoord()` function : 주소에 대한 좌표변환 (Google Maps API 를 이용)
 
-## Install
+```{r}
+addressToCoord("강남구청역")
+```
 
-```{r eval = F}
-devtools::install_github("ntels-BI/ntelsBI")
+```{r}
+library(leaflet)
+library(dplyr)
+
+pd <- data.frame(add = c("강남구청역")) %>%
+  mutate(long = addressToCoord(add)[1], lat = addressToCoord(add)[2])
+
+leaflet(data = pd) %>% 
+  addTiles() %>%
+  addMarkers(~long, ~lat, popup = ~as.character(add), label = ~as.character(add))
 ```
 
 <br><br>

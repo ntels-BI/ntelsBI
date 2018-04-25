@@ -1,5 +1,12 @@
 <br><br>
 
+Install
+-------
+
+    devtools::install_github("ntels-BI/ntelsBI")
+
+<br><br>
+
 Tutorial
 --------
 
@@ -18,8 +25,8 @@ Tutorial
     ##             Reference
     ## Prediction   setosa versicolor virginica
     ##   setosa         15          0         0
-    ##   versicolor      0         13         2
-    ##   virginica       0          2        13
+    ##   versicolor      0         12         1
+    ##   virginica       0          3        14
     ## 
     ## Overall Statistics
     ##                                           
@@ -34,14 +41,14 @@ Tutorial
     ## Statistics by Class:
     ## 
     ##                      Class: setosa Class: versicolor Class: virginica
-    ## Sensitivity                 1.0000            0.8667           0.8667
-    ## Specificity                 1.0000            0.9333           0.9333
-    ## Pos Pred Value              1.0000            0.8667           0.8667
-    ## Neg Pred Value              1.0000            0.9333           0.9333
+    ## Sensitivity                 1.0000            0.8000           0.9333
+    ## Specificity                 1.0000            0.9667           0.9000
+    ## Pos Pred Value              1.0000            0.9231           0.8235
+    ## Neg Pred Value              1.0000            0.9062           0.9643
     ## Prevalence                  0.3333            0.3333           0.3333
-    ## Detection Rate              0.3333            0.2889           0.2889
-    ## Detection Prevalence        0.3333            0.3333           0.3333
-    ## Balanced Accuracy           1.0000            0.9000           0.9000
+    ## Detection Rate              0.3333            0.2667           0.3111
+    ## Detection Prevalence        0.3333            0.2889           0.3778
+    ## Balanced Accuracy           1.0000            0.8833           0.9167
 
 -   GLM 을 통한 `Sonar` 의 `Class` 분류 (Class = "R" 이 주관심사일 경우)
 
@@ -54,25 +61,25 @@ Tutorial
     ## 
     ##           Reference
     ## Prediction  M  R
-    ##          M 23  9
-    ##          R 10 20
+    ##          M 22  9
+    ##          R 11 20
     ##                                           
-    ##                Accuracy : 0.6935          
-    ##                  95% CI : (0.5635, 0.8044)
+    ##                Accuracy : 0.6774          
+    ##                  95% CI : (0.5466, 0.7906)
     ##     No Information Rate : 0.5323          
-    ##     P-Value [Acc > NIR] : 0.007171        
+    ##     P-Value [Acc > NIR] : 0.01444         
     ##                                           
-    ##                   Kappa : 0.3858          
-    ##  Mcnemar's Test P-Value : 1.000000        
+    ##                   Kappa : 0.3548          
+    ##  Mcnemar's Test P-Value : 0.82306         
     ##                                           
     ##             Sensitivity : 0.6897          
-    ##             Specificity : 0.6970          
-    ##          Pos Pred Value : 0.6667          
-    ##          Neg Pred Value : 0.7188          
+    ##             Specificity : 0.6667          
+    ##          Pos Pred Value : 0.6452          
+    ##          Neg Pred Value : 0.7097          
     ##              Prevalence : 0.4677          
     ##          Detection Rate : 0.3226          
-    ##    Detection Prevalence : 0.4839          
-    ##       Balanced Accuracy : 0.6933          
+    ##    Detection Prevalence : 0.5000          
+    ##       Balanced Accuracy : 0.6782          
     ##                                           
     ##        'Positive' Class : R               
     ## 
@@ -83,7 +90,7 @@ Tutorial
 
     ml(mtcars, "mpg", method = "rf") %>% fitSummary(type = "reg")
 
-    ## [1] 6.187435
+    ## [1] 10.91898
 
 <br>
 
@@ -111,13 +118,6 @@ Tutorial
     ## 2 127.9644 37.34161
     ## 3 127.9428 37.34593
     ## 4 127.9196 37.32292
-
-<br><br>
-
-Install
--------
-
-    devtools::install_github("ntels-BI/ntelsBI")
 
 <br><br>
 
